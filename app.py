@@ -1,15 +1,15 @@
 import g4f
 import uvicorn
-from g4f import g4f_api
+# KESİNLİKLE BU ŞEKİLDE OLMALI
+from g4f import g4f_api 
 import os
 
-# Render'ın atadığı port numarasını alıyoruz (genellikle 10000 civarıdır)
 PORT = int(os.environ.get("PORT", 8080))
 
-# API ayarlarını burada zorluyoruz (Sadece stabil olan modeli kullanması için)
-app.model = "llama-3-8b"
-app.provider = g4f.Provider.DeepInfra
+# Artık 'g4f_api' nesnesini kullanıyoruz
+g4f_api.model = "llama-3-8b"
+g4f_api.provider = g4f.Provider.DeepInfra
 
 if __name__ == '__main__':
-    # Uvicorn'ı, Render'ın atadığı porta bağlayarak çalıştırıyoruz.
-    uvicorn.run(app, host="0.0.0.0", port=PORT)
+    # 'g4f_api' nesnesini çalıştırıyoruz
+    uvicorn.run(g4f_api, host="0.0.0.0", port=PORT)
