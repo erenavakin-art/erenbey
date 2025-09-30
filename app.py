@@ -1,6 +1,6 @@
 import g4f
 import uvicorn
-from g4f.api import app
+from g4f.api import server
 import os
 
 # Render'ın atadığı port numarasını alıyoruz (genellikle 10000 civarıdır)
