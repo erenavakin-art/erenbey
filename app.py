@@ -1,23 +1,15 @@
 import g4f
-import g4f
 import uvicorn
 import os
+# En güncel sürümde bu import'un çalışması GEREKİR.
+from g4f.api import app as g4f_app 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-# FastAPI'yi dahil ediyoruz
-
-# G4F'in API nesnesini doğrudan bir içe aktarma hatası almadan almaya çalışıyoruz.
-# Bunu, G4F'in kendisini bir fonksiyon olarak çağırarak yapıyoruz.
-g4f_app = g4f.app.API() 
-
-# Gerekli G4F ayarlarını yapıyoruz (Artık g4f_app üzerinden)
-g4f_app.model = "llama-3-8b"
-g4f_app.provider = g4f.Provider.DeepInfra
 
 # G4F API'sini barındıracak ana FastAPI uygulamasını oluşturuyoruz
 app = FastAPI()
 
-# Çapraz Kaynak Paylaşımı (CORS) ayarları. Siteniz için KRİTİKTİR.
+# Çapraz Kaynak Paylaşımı (CORS) ayarları.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], 
@@ -28,6 +20,10 @@ app.add_middleware(
 
 # G4F'in tüm yollarını (routes) ana uygulamaya dahil ediyoruz
 app.include_router(g4f_app.router)
+
+# Gerekli G4F ayarlarını yapıyoruz 
+g4f_app.model = "llama-3-8b"
+g4f_app.provider = g4f.Provider.DeepInfra
 
 # Render'ın portunu alıyoruz
 PORT = int(os.environ.get("PORT", 8080))
