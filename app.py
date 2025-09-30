@@ -2,7 +2,7 @@ import g4f
 import uvicorn
 import os
 # En güncel sürümde bu import'un çalışması GEREKİR.
-from g4f.api import app as g4f_app 
+from g4f.api import api as g4f_app
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
