@@ -1,2 +1,4 @@
 g4f==0.6.2.0
 uvicorn[standard]
+fastapi
+pydantic
